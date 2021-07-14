@@ -4,6 +4,7 @@ from .models import StudentModel, StudentInformationModel, CourseModel
 from django.forms.models import model_to_dict
 # Create your views here.
 import json
+from django.core.paginator import Paginator
 
 
 # 主界面
@@ -250,3 +251,28 @@ def update(request):
         return render(request, 'studentManage/update.html', context)
     else:
         return render(request, 'studentManage/update.html', context)
+
+
+# def show(request):
+#     import datetime
+#     s = "hello"
+#     l = [111, 222, 333]  # 列表
+#     dic = {"name": "yuan", "age": 18}  # 字典
+#     date = datetime.date(1993, 5, 2)  # 日期对象
+#
+#     class Person(object):
+#         def __init__(self, name):
+#             self.name = name
+#         def dream(self):
+#             return 'dreamer'
+#     person_yuan = Person("chao")  # 自定义类对象
+#     person_egon = Person("yantao")
+#     person_alex = Person("jinxin")
+#
+#     person_list = [person_yuan, person_egon, person_alex]
+#
+#     return render(request, "studentManage/info.html", {"l": l, "dic": dic, "date": date, "person_list": person_list})
+
+def show_all(request):
+    list_stu = StudentInformationModel.objects.all()
+    return render(request, "studentManage/info.html", {"list_stu": list_stu})
